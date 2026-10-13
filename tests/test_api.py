@@ -6,12 +6,18 @@ All tests use FastAPI TestClient so no server needs to be running.
 """
 
 import os
-from fastapi.testclient import TestClient
+import sys
+from pathlib import Path
+
+# Ensure root workspace directory is in sys.path
+root_dir = str(Path(__file__).resolve().parent.parent)
+if root_dir not in sys.path:
+    sys.path.insert(0, root_dir)
 
 # Set dummy env vars before importing the app so pydantic-settings is happy
-os.environ.setdefault("GROQ_API_KEY",      "test-key")
-os.environ.setdefault("TAVILY_API_KEY",    "test-key")
-os.environ.setdefault("LANGCHAIN_API_KEY", "test-key")
+for key in ("GROQ_API_KEY", "TAVILY_API_KEY", "LANGCHAIN_API_KEY"):
+    if not os.environ.get(key):
+        os.environ[key] = "test-key"
 os.environ["LANGCHAIN_TRACING_V2"] = "false"   # never trace in tests
 
 from backend.main import app                          # noqa: E402
