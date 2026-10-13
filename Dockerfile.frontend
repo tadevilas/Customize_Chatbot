@@ -1,0 +1,30 @@
+# ── Phase 9 — Frontend Dockerfile ───────────────────────────────────────────
+# Streamlit app — connects to the backend container via BACKEND_URL env var.
+#
+# Build:  docker build -f Dockerfile.frontend -t agentic-ai-frontend .
+# Run:    docker run -e BACKEND_URL=http://backend:8000 -p 8501:8501 agentic-ai-frontend
+# ─────────────────────────────────────────────────────────────────────────────
+
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Only the packages Streamlit actually needs
+RUN pip install --no-cache-dir \
+        streamlit>=1.38.0 \
+        requests>=2.32.3
+
+# Copy frontend source
+COPY frontend/ ./frontend/
+
+ENV PYTHONUNBUFFERED=1
+
+EXPOSE 8501
+
+# BACKEND_URL is read by streamlit_app.py — override at runtime if needed
+ENV BACKEND_URL=http://backend:8000
+
+CMD ["streamlit", "run", "frontend/streamlit_app.py", \
+     "--server.port=8501", \
+     "--server.address=0.0.0.0", \
+     "--server.headless=true"]

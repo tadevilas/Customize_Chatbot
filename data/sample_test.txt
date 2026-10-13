@@ -1,0 +1,15 @@
+This is a sample document for testing the RAG pipeline.
+
+Section 1: Company Overview
+IBM was founded in 1911 and is headquartered in Armonk, New York.
+It operates in over 175 countries worldwide.
+
+Section 2: Revenue
+In 2023, IBM reported total revenue of $61.9 billion.
+Software segment revenue grew by 5.5% year over year.
+Consulting revenue reached $19.8 billion.
+
+Section 3: AI Strategy
+IBM has invested heavily in AI through its watsonx platform.
+The platform includes watsonx.ai, watsonx.data, and watsonx.governance.
+IBM aims to help enterprises adopt AI responsibly and at scale.

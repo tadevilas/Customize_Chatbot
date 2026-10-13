@@ -1,0 +1,69 @@
+# ── Phase 9 — Docker Compose ─────────────────────────────────────────────────
+# Runs the full platform locally with a single command:
+#   docker compose up --build
+#
+# Services:
+#   backend  → FastAPI on port 8000
+#   frontend → Streamlit on port 8501
+#
+# Volumes persist SQLite databases and ChromaDB across container restarts.
+# API keys are injected from the host .env file — never baked into the image.
+# ─────────────────────────────────────────────────────────────────────────────
+
+version: "3.9"
+
+services:
+
+  # ── FastAPI backend ─────────────────────────────────────────────────────────
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: agentic-ai-backend
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      # Override DB paths to use volume-mounted directories inside the container
+      APP_DATABASE_URL: "sqlite:////data/app.db"
+      BUSINESS_DB_PATH: "/data/business_data.db"
+      UPLOADS_DIR: "/data/uploads"
+      CHROMA_DIR: "/chroma_db"
+    ports:
+      - "8000:8000"
+    volumes:
+      # Persist SQLite databases and uploads outside the container
+      - app_data:/data
+      - chroma_data:/chroma_db
+      # Mount HuggingFace model cache so models survive container restarts
+      - hf_cache:/root/.cache/huggingface
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+  # ── Streamlit frontend ──────────────────────────────────────────────────────
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: agentic-ai-frontend
+    restart: unless-stopped
+    environment:
+      BACKEND_URL: "http://backend:8000"
+    ports:
+      - "8501:8501"
+    depends_on:
+      backend:
+        condition: service_healthy
+
+# ── Named volumes ─────────────────────────────────────────────────────────────
+volumes:
+  app_data:
+    driver: local
+  chroma_data:
+    driver: local
+  hf_cache:
+    driver: local

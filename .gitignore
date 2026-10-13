@@ -1,0 +1,36 @@
+﻿# Secrets - never commit
+.env
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+coverage.xml
+
+# Local data, databases and vector store
+data/*.db
+data/uploads/
+data/rag_data/
+chroma_db/
+.cache/
+
+# Notebook checkpoints
+.ipynb_checkpoints/
+
+# Editor / OS artefacts
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Bob local files
+.bob/

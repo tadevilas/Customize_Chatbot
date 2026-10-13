@@ -1,0 +1,44 @@
+# ── .dockerignore ────────────────────────────────────────────────────────────
+# Exclude files that must NOT be copied into the Docker build context.
+# This keeps images lean and prevents secrets from leaking.
+
+# Virtual environment — never copy into image
+.venv/
+venv/
+env/
+
+# Secrets — injected at runtime via --env-file / docker-compose env_file
+.env
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Notebooks (not needed in production image)
+notebooks/
+
+# Local data & model caches (mounted as volumes at runtime)
+data/
+chroma_db/
+.cache/
+
+# Git
+.git/
+.gitignore
+
+# Editor / OS artefacts
+.vscode/
+.idea/
+*.DS_Store
+Thumbs.db
+
+# CI artefacts
+.github/
+htmlcov/
+.coverage
+coverage.xml
