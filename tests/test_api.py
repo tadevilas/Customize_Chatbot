@@ -8,6 +8,7 @@ All tests use FastAPI TestClient so no server needs to be running.
 import os
 import sys
 from pathlib import Path
+from fastapi.testclient import TestClient
 
 # Ensure root workspace directory is in sys.path
 root_dir = str(Path(__file__).resolve().parent.parent)
