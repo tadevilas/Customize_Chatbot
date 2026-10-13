@@ -10,8 +10,7 @@ direct_node:
   from the LLM's knowledge (greetings, general facts, etc.)
 """
 
-from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
-from backend.config import settings
+from langchain_core.messages import SystemMessage, HumanMessage
 from backend.agents.llm_factory import get_llm, ainvoke_with_fallback
 from backend.graphs.state import AgentState
 

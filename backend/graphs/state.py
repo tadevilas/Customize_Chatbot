@@ -5,7 +5,7 @@ The typed state object that flows through every node in the LangGraph graph.
 Every node reads from this state and returns a partial update to it.
 """
 
-from typing import List, Dict, Any, Optional, Annotated
+from typing import List, Dict, Any, Annotated
 from typing_extensions import TypedDict
 from langchain_core.messages import BaseMessage
 import operator

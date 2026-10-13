@@ -1,7 +1,7 @@
 import os
 import sys
 import asyncio
-from typing import List, Dict, Any, Optional
+from typing import Dict, Any, Optional
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from backend.config import settings
 

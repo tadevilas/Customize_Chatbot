@@ -6,7 +6,6 @@ All tests use FastAPI TestClient so no server needs to be running.
 """
 
 import os
-import pytest
 from fastapi.testclient import TestClient
 
 # Set dummy env vars before importing the app so pydantic-settings is happy

@@ -10,7 +10,6 @@ just a routing decision in JSON.
 
 import json
 from langchain_core.messages import SystemMessage, HumanMessage
-from backend.config import settings
 from backend.agents.llm_factory import get_llm
 from backend.graphs.state import AgentState
 

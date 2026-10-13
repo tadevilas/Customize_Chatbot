@@ -30,6 +30,10 @@ dependencies = [
     "httpx>=0.27.0"
 ]
 
+[tool.ruff.lint]
+# Only real-bug rules (pycodestyle errors, pyflakes) — no style rules in CI
+select = ["E4", "E7", "E9", "F"]
+
 [tool.hatch.build.targets.wheel]
 packages = ["backend"]
 

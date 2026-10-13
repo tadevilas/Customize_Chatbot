@@ -1,6 +1,5 @@
 import os
-import json
-from typing import List, Dict, Any, Optional
+from typing import List, Optional
 from mcp.server.fastmcp import FastMCP
 from tavily import TavilyClient
 

@@ -12,9 +12,7 @@ Each node:
   - returns its output as a string in the state field it owns
 """
 
-import asyncio
-from langchain_core.messages import SystemMessage, HumanMessage, AIMessage, ToolMessage, BaseMessage
-from backend.config import settings
+from langchain_core.messages import SystemMessage, HumanMessage, ToolMessage, BaseMessage
 from backend.agents.llm_factory import get_llm, ainvoke_with_fallback
 from backend.graphs.state import AgentState
 

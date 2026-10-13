@@ -126,15 +126,15 @@ with st.sidebar:
             health_data = health_resp.json()
             st.success("Backend: Online ✅")
             st.write(f"**Primary Model:** `{health_data.get('primary_model')}`")
-            st.write(f"**MCP SQLite:** Active 🟢")
-            st.write(f"**MCP Tavily Search:** Active 🌐")
-            st.write(f"**RAG (ChromaDB + BGE):** Active 📚")
+            st.write("**MCP SQLite:** Active 🟢")
+            st.write("**MCP Tavily Search:** Active 🌐")
+            st.write("**RAG (ChromaDB + BGE):** Active 📚")
 
             # LangSmith tracing status
             st.markdown("---")
             if health_data.get("langsmith_tracing"):
                 project = health_data.get("langsmith_project", "")
-                st.success(f"**LangSmith:** Tracing ON 🔭")
+                st.success("**LangSmith:** Tracing ON 🔭")
                 st.caption(f"Project: `{project}`")
                 langsmith_url = f"https://smith.langchain.com/projects/{project}"
                 st.markdown(f"[Open LangSmith Dashboard ↗]({langsmith_url})")
@@ -232,7 +232,7 @@ if prompt := st.chat_input("Ask a question (e.g. 'Show total sales by product' o
                                 full_response += event_data.get("content", "")
                                 message_placeholder.markdown(full_response + "▌")
                             elif event_type == "agent_start":
-                                status_container.write(f"🧠 Supervisor analysing query...")
+                                status_container.write("🧠 Supervisor analysing query...")
                             elif event_type == "route":
                                 agents = event_data.get("agents", [])
                                 agent_labels = {"sql": "🗄️ SQL Agent", "search": "🌐 Research Agent", "rag": "📚 RAG Agent", "direct": "💬 Direct Answer"}

@@ -4,7 +4,7 @@ import json
 import os
 import shutil
 from typing import List, Optional
-from fastapi import FastAPI, Depends, HTTPException, UploadFile, File, status
+from fastapi import FastAPI, Depends, HTTPException, UploadFile, File
 from fastapi.responses import StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
@@ -16,7 +16,7 @@ from backend.database.business_db import init_business_database
 from backend.graphs.graph import get_graph
 from backend.rag.document_loader import load_document
 from backend.rag.chunker import chunk_documents
-from backend.rag.vector_store import add_documents, clear
+from backend.rag.vector_store import add_documents
 from backend.observability.tracing import setup_tracing, get_run_config, tracing_enabled
 from langchain_core.messages import HumanMessage, AIMessage
 
@@ -67,7 +67,6 @@ class FeedbackRequest(BaseModel):
 
 @app.get("/health", tags=["System"])
 def health_check():
-    from backend.observability.tracing import tracing_enabled
     return {
         "status": "healthy",
         "primary_model": settings.PRIMARY_MODEL,

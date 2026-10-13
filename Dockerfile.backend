@@ -32,9 +32,8 @@ WORKDIR /app
 # Copy installed packages from builder
 COPY --from=builder /install /usr/local
 
-# Copy application source
+# Copy application source (data/ is excluded by .dockerignore and created below)
 COPY backend/ ./backend/
-COPY data/     ./data/
 
 # Create required directories (volumes will override at runtime)
 RUN mkdir -p data/uploads chroma_db

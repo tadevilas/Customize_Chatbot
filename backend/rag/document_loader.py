@@ -14,7 +14,6 @@ Returns: list of LangChain Document objects
 """
 
 import os
-import io
 from pathlib import Path
 from typing import List
 
